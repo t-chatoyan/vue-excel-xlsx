@@ -8,7 +8,7 @@ Convert your data as an XLSX file
     npm install vue-excel-xlsx --save
 ```
 
-###import vue-excel-xlsx in your app:
+#### import vue-excel-xlsx in your app:
 
 ``` javascript
     import VueExcelXlsx from "vue-excel-xlsx";
@@ -17,7 +17,7 @@ Convert your data as an XLSX file
     Vue.use(VueExcelXlsx);
 ```
 
-###Add in your template
+#### Add in your template
 ``` html
     <vue-excel-xlsx
         :data="data"
@@ -29,7 +29,7 @@ Convert your data as an XLSX file
     </vue-excel-xlsx>
 ```
 
-###Add in your script
+#### Add in your script
 ``` javascript
         data() {
             return {
