@@ -1,0 +1,38 @@
+{
+  "name": "vue-excel-xlsx",
+  "version": "1.0.0",
+  "description": "Export your JSON as an XLSX file",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/t-chatoyan/vue-excel-xlsx"
+  },
+  "keywords": [
+    "vue",
+    "excel",
+    "xlsx",
+    "json",
+    "export",
+    "json excel",
+    "export excel",
+    "download excel",
+    "excel xlsx",
+    "export"
+  ],
+  "author": "Taron Chatoyan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/t-chatoyan/vue-excel-xlsx/issues"
+  },
+  "homepage": "https://github.com/t-chatoyan/vue-excel-xlsx#readme",
+  "devDependencies": {
+    "bili": "^4.8.0",
+    "rollup-plugin-vue": "^5.0.0",
+    "vue-template-compiler": "^2.6.10",
+    "jquery": "^3.4.1",
+    "xlsx": "^0.14.4"
+  }
+}
