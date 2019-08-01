@@ -1,7 +1,7 @@
 {
   "name": "vue-excel-xlsx",
   "version": "1.0.0",
-  "description": "Export your JSON as an XLSX file",
+  "description": "Export your data as an XLSX file",
   "main": "index.js",
   "scripts": {
     "test": "test"
