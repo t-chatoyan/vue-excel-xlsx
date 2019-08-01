@@ -1,6 +1,6 @@
 {
   "name": "vue-excel-xlsx",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Export your data as an XLSX file",
   "main": "index.js",
   "scripts": {
