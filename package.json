@@ -31,7 +31,9 @@
   "devDependencies": {
     "bili": "^4.8.0",
     "rollup-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.6.10",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "dependencies": {
     "jquery": "^3.4.1",
     "xlsx": "^0.14.4"
   }
