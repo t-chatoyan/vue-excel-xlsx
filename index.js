@@ -1,7 +1,7 @@
-import DownloadExcel from "./DownloadExcel.vue";
+import VueExcelXlsx from "./VueExcelXlsx.vue";
 
 export default {
     install(Vue, options) {
-        Vue.component("vue-excel-xlsx", DownloadExcel);
+        Vue.component("vue-excel-xlsx", VueExcelXlsx);
     }
 };
