@@ -11,8 +11,10 @@ Convert your data as an XLSX file
 ####import vue-excel-xlsx in your app:
 
 ``` javascript
+    import VueExcelXlsx from "vue-excel-xlsx";
     import Vue from "vue";
-    import "vue-excel-xlsx";
+
+    Vue.use(VueExcelXlsx);
 ```
 
 ####Add in your template
@@ -28,9 +30,6 @@ Convert your data as an XLSX file
 
 ####Add in your script
 ``` javascript
-        components: {
-            VueExcelXlsx
-        },
         data() {
             return {
                 columns : [

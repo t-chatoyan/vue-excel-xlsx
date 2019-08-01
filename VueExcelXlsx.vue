@@ -30,6 +30,14 @@
             exportExcel() {
                 let createXLSLFormatObj = [];
                 let newXlsHeader = [];
+                if (this.columns.length === 0){
+                    console.log("Add columns!");
+                    return;
+                }
+                if (this.data.length === 0){
+                    console.log("Add data!");
+                    return;
+                }
                 $.each(this.columns, function(index, value) {
                     newXlsHeader.push(value.label);
                 });
