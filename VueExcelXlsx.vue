@@ -9,7 +9,7 @@
     window.$ = window.jQuery = require('jquery');
 
     export default {
-        name: "download-excel",
+        name: "vue-excel-xlsx",
 
         props: {
             columns: {
