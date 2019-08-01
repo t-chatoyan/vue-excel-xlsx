@@ -23,6 +23,10 @@
             filename: {
                 type: String,
                 default: 'excel'
+            },
+            sheetname: {
+                type: String,
+                default: 'SheetName'
             }
         },
 
@@ -30,37 +34,34 @@
             exportExcel() {
                 let createXLSLFormatObj = [];
                 let newXlsHeader = [];
-                if (this.columns.length === 0){
+                let vm = this;
+                if (vm.columns.length === 0){
                     console.log("Add columns!");
                     return;
                 }
-                if (this.data.length === 0){
+                if (vm.data.length === 0){
                     console.log("Add data!");
                     return;
                 }
-                $.each(this.columns, function(index, value) {
+                $.each(vm.columns, function(index, value) {
                     newXlsHeader.push(value.label);
                 });
 
                 createXLSLFormatObj.push(newXlsHeader);
-                $.each(this.data, function(index, value) {
+                $.each(vm.data, function(index, value) {
                     let innerRowData = [];
-                    $.each(this.columns, function(index, val) {
+                    $.each(vm.columns, function(index, val) {
                         innerRowData.push(value[val.field]);
                     });
                     createXLSLFormatObj.push(innerRowData);
                 });
-                console.log(createXLSLFormatObj);
-                /* File Name */
-                let filename = this.filename + ".xlsx";
-                //
-                // /* Sheet Name */
-                let ws_name = "FreakySheet";
-                //
+
+                let filename = vm.filename + ".xlsx";
+
+                let ws_name = vm.sheetname;
+
                 let wb = XLSX.utils.book_new(),
                     ws = XLSX.utils.aoa_to_sheet(createXLSLFormatObj);
-
-                // /* Add worksheet to workbook */
                 XLSX.utils.book_append_sheet(wb, ws, ws_name);
                 XLSX.writeFile(wb, filename);
             }

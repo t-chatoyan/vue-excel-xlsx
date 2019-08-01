@@ -22,7 +22,8 @@ Convert your data as an XLSX file
     <vue-excel-xlsx
         :data="data"
         :columns="columns"
-        :filename="filename"
+        :filename="'filename'"
+        :sheetname="'sheetname'"
         >
         Download
     </vue-excel-xlsx>
