@@ -50,13 +50,13 @@
                     });
                     createXLSLFormatObj.push(innerRowData);
                 });
+                console.log(createXLSLFormatObj);
                 /* File Name */
                 let filename = this.filename + ".xlsx";
                 //
                 // /* Sheet Name */
                 let ws_name = "FreakySheet";
                 //
-                if (typeof console !== 'undefined') console.log(new Date());
                 let wb = XLSX.utils.book_new(),
                     ws = XLSX.utils.aoa_to_sheet(createXLSLFormatObj);
 
