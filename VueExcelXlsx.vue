@@ -51,7 +51,11 @@
                 $.each(vm.data, function(index, value) {
                     let innerRowData = [];
                     $.each(vm.columns, function(index, val) {
-                        innerRowData.push(value[val.field]);
+                        if (val.dataFormat && typeof val.dataFormat === 'function') {
+                            innerRowData.push(val.dataFormat(value[val.field]));
+                        }else {
+                            innerRowData.push(value[val.field]);
+                        }
                     });
                     createXLSLFormatObj.push(innerRowData);
                 });

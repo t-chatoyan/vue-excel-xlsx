@@ -8,7 +8,7 @@ Convert your data as an XLSX file
     npm install vue-excel-xlsx --save
 ```
 
-#### import vue-excel-xlsx in your app:
+#### Import vue-excel-xlsx in your app:
 
 ``` javascript
     import VueExcelXlsx from "vue-excel-xlsx";
@@ -35,24 +35,46 @@ Convert your data as an XLSX file
             return {
                 columns : [
                     {
-                        label: "Name",
-                        field: "name",
+                        label: "Product",
+                        field: "product",
                     },
                     {
-                        label: "Country",
-                        field: "country",
+                        label: "Price",
+                        field: "price",
+                        dataFormat: this.priceFormat
+                    },
+                    {
+                        label: "Quantity",
+                        field: "quantity",
                     },
                 ],
                 data : [
                     {
-                        name: "Tony Peña",
-                        country: "United States",
+                        product: "Beverage",
+                        price: 10,
+                        quantity: 2
                     },
                     {
-                        name: "Thessaloniki",
-                        country: "Greece",
+                        product: "Snack",
+                        price: 12,
+                        quantity: 6
+                    },
+                    {
+                        product: "Beverage",
+                        price: 10,
+                        quantity: 5
+                    },
+                    {
+                        product: "Snack",
+                        price: 12,
+                        quantity: 3
                     }
                 ],
+            }
+        },
+        methods: {
+            priceFormat(value){
+                return '$ ' + value;
             }
         }
 ```
