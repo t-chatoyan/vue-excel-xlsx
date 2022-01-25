@@ -34,7 +34,6 @@
     "vue-template-compiler": "^2.6.10"
   },
   "dependencies": {
-    "jquery": "^3.4.1",
     "xlsx": "^0.14.4"
   }
 }
