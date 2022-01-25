@@ -18,18 +18,18 @@
                 type: Array,
                 default: () =>  []
             },
-            filename: {
+            fileName: {
                 type: String,
                 default: 'excel'
+            },
+            sheetName: {
+                type: String,
+                default: 'SheetName'
             },
             fileType: {
                 type: String,
                 default: 'xlsx',
                 validator: (val) => ['xlsx', 'xls'].includes(val)
-            },
-            sheetName: {
-                type: String,
-                default: 'SheetName'
             }
         },
 
@@ -67,18 +67,18 @@
                     createXLSLFormatObj.push(innerRowData);
                 });
 
-                let filename = vm.filename + "." + vm.fileType;
+                let fileName = vm.fileName + "." + vm.fileType;
 
                 let ws_name = vm.sheetName;
 
                 let wb = XLSX.utils.book_new(),
                     ws = XLSX.utils.aoa_to_sheet(createXLSLFormatObj);
                 XLSX.utils.book_append_sheet(wb, ws, ws_name);
-                XLSX.writeFile(wb, filename);
+                XLSX.writeFile(wb, fileName);
             },
             getNestedValue(object, string) {
-                string = string.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
-                string = string.replace(/^\./, '');           // strip a leading dot
+                string = string.replace(/\[(\w+)\]/g, '.$1');
+                string = string.replace(/^\./, '');
                 let a = string.split('.');
                 for (let i = 0, n = a.length; i < n; ++i) {
                   let k = a[i];
