@@ -55,7 +55,7 @@
                     let innerRowData = [];
                     vm.columns.map(val => {
                       let fieldValue = value[val.field];
-                      if (val.field.split('.').length > 1) {
+                      if (val.field.toString().split('.').length > 1) {
                         fieldValue = this.getNestedValue(value, val.field);
                       }
                       if (val.dataFormat && typeof val.dataFormat === 'function') {
