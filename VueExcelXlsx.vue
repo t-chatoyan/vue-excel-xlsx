@@ -63,14 +63,27 @@
                         console.log("Add data!");
                         return;
                     }
-                    sheet.columns.map(column => {
+
+                    const colConfig = [];
+
+                    sheet.columns.map((column, index) => {
                         newXlsHeader.push(column.label);
+
+                        if (column.width) {
+                            let colWidth = column.width;
+
+                            if (colWidth === 'auto') {
+                                colWidth = column.label.length;
+                            }
+
+                            colConfig[index] = { wch: colWidth };
+                        }
                     });
 
                     createXLSLFormatObj.push(newXlsHeader);
                     sheet.data.map(value => {
                         let innerRowData = [];
-                        sheet.columns.map(val => {
+                        sheet.columns.map((val, colIndex) => {
                             let fieldValue = value[val.field];
                             if (val.field.split('.').length > 1) {
                                 fieldValue = this.getNestedValue(value, val.field);
@@ -80,6 +93,12 @@
                             } else {
                                 innerRowData.push(fieldValue);
                             }
+
+                            if (val.width === 'auto') {
+                                const fieldValueLength = fieldValue.length;
+
+                                if (fieldValueLength > colConfig[colIndex].wch) colConfig[colIndex].wch = fieldValueLength;
+                            }
                         });
                         createXLSLFormatObj.push(innerRowData);
                     });
@@ -87,6 +106,9 @@
                     let ws_name = sheet.sheetName;
 
                     let ws = XLSX.utils.aoa_to_sheet(createXLSLFormatObj);
+
+                    ws['!cols'] = colConfig;
+
                     XLSX.utils.book_append_sheet(wb, ws, ws_name);
                 });
 

@@ -190,6 +190,30 @@ methods: {
 }
 ```
 
+## Column widths
+
+The width of a column can be set with the `width` parameter on a column definition. An arbirtary width can be set, or if
+set to `auto` the width will be set to (roughly) the width of the longest cell.
+
+### e.g.
+
+```js
+...
+columns : [
+    {
+        label: "Product",
+        field: "product",
+        width: 'auto',
+    },
+    {
+        label: "Quantity",
+        field: "quantity",
+        width: 20,
+    },
+],
+...
+```
+
 ## Props
 
 | Name      | Type  | Description                         | Default Value|
