@@ -11,7 +11,7 @@
         name: "vue-excel-xlsx",
         props: {
             sheets: {
-                type: array,
+                type: Array,
                 default: () => [],
             },
             columns: {
