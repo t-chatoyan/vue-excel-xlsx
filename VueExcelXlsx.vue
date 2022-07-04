@@ -10,13 +10,17 @@
     export default {
         name: "vue-excel-xlsx",
         props: {
+            sheets: {
+                type: array,
+                default: () => [],
+            },
             columns: {
                 type: Array,
                 default: () => []
             },
             data: {
                 type: Array,
-                default: () =>  []
+                default: () => []
             },
             fileName: {
                 type: String,
@@ -35,45 +39,59 @@
 
         methods: {
             exportExcel() {
-                let createXLSLFormatObj = [];
-                let newXlsHeader = [];
                 let vm = this;
-                if (vm.columns.length === 0){
-                    console.log("Add columns!");
-                    return;
-                }
-                if (vm.data.length === 0){
-                    console.log("Add data!");
-                    return;
-                }
-                vm.columns.map(column => {
-                    newXlsHeader.push(column.label);
-                });
 
-                createXLSLFormatObj.push(newXlsHeader);
-                vm.data.map(value => {
-                    let innerRowData = [];
-                    vm.columns.map(val => {
-                      let fieldValue = value[val.field];
-                      if (val.field.split('.').length > 1) {
-                        fieldValue = this.getNestedValue(value, val.field);
-                      }
-                      if (val.dataFormat && typeof val.dataFormat === 'function') {
-                            innerRowData.push(val.dataFormat(fieldValue));
-                        } else {
-                            innerRowData.push(fieldValue);
-                        }
+                let wb = XLSX.utils.book_new();
+
+                let sheets = vm.sheets;
+                if (sheets.length === 0) {
+                    sheets = [{
+                        columns: vm.columns,
+                        data: vm.data,
+                        sheetName: vm.sheetName,
+                    }];
+                }
+
+                sheets.forEach((sheet) => {
+                    let createXLSLFormatObj = [];
+                    let newXlsHeader = [];
+                    if (sheet.columns.length === 0) {
+                        console.log("Add columns!");
+                        return;
+                    }
+                    if (sheet.data.length === 0) {
+                        console.log("Add data!");
+                        return;
+                    }
+                    sheet.columns.map(column => {
+                        newXlsHeader.push(column.label);
                     });
-                    createXLSLFormatObj.push(innerRowData);
+
+                    createXLSLFormatObj.push(newXlsHeader);
+                    sheet.data.map(value => {
+                        let innerRowData = [];
+                        sheet.columns.map(val => {
+                            let fieldValue = value[val.field];
+                            if (val.field.split('.').length > 1) {
+                                fieldValue = this.getNestedValue(value, val.field);
+                            }
+                            if (val.dataFormat && typeof val.dataFormat === 'function') {
+                                innerRowData.push(val.dataFormat(fieldValue));
+                            } else {
+                                innerRowData.push(fieldValue);
+                            }
+                        });
+                        createXLSLFormatObj.push(innerRowData);
+                    });
+
+                    let ws_name = sheet.sheetName;
+
+                    let ws = XLSX.utils.aoa_to_sheet(createXLSLFormatObj);
+                    XLSX.utils.book_append_sheet(wb, ws, ws_name);
                 });
 
                 let fileName = vm.fileName + "." + vm.fileType;
 
-                let ws_name = vm.sheetName;
-
-                let wb = XLSX.utils.book_new(),
-                    ws = XLSX.utils.aoa_to_sheet(createXLSLFormatObj);
-                XLSX.utils.book_append_sheet(wb, ws, ws_name);
                 XLSX.writeFile(wb, fileName);
             },
             getNestedValue(object, string) {
@@ -81,12 +99,12 @@
                 string = string.replace(/^\./, '');
                 let a = string.split('.');
                 for (let i = 0, n = a.length; i < n; ++i) {
-                  let k = a[i];
-                  if (k in object) {
-                    object = object[k];
-                  } else {
-                    return;
-                  }
+                    let k = a[i];
+                    if (k in object) {
+                        object = object[k];
+                    } else {
+                        return;
+                    }
                 }
                 return object;
             }
